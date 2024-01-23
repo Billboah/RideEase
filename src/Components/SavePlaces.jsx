@@ -1,5 +1,4 @@
 import React from 'react'
-import tw from 'tailwind-styled-components'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useRouter } from 'next/router'
 
@@ -17,7 +16,7 @@ function SavePlaces({ pickup, id, dropoff, deleteLocationItem }) {
   }
 
   return (
-    <SavePlace>
+    <div>
       <li className='group ml-[35px] flex w-full justify-between p-[5px] hover:bg-gray-100 active:bg-gray-200'>
         <button onClick={findLocation} className='flex-1 text-left'>
           <div>
@@ -31,12 +30,10 @@ function SavePlaces({ pickup, id, dropoff, deleteLocationItem }) {
           <DeleteIcon />
         </button>
       </li>
-    </SavePlace>
+    </div>
   )
 }
 
 export default SavePlaces
 
-const SavePlace = tw.div`
-flex items-center bg-white px-4
-`
+

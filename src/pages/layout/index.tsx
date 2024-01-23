@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
-export const ComponentLayout = ({ children }: { children: string }) => {
+export const ComponentLayout = ({ children }: { children: any }) => {
   const { data: session } = useSession()
   const router = useRouter()
 
@@ -17,5 +17,5 @@ export const ComponentLayout = ({ children }: { children: string }) => {
     }
   }, [session, router])
 
-  return <main className='h-full w-full'>{children}</main>
+  return <div className='h-full w-full'>{children}</div>
 }

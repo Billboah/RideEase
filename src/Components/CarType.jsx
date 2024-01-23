@@ -25,10 +25,11 @@ const CarType = ({ car, pickupCoordinates, dropoffCoordinates }) => {
     () => {
       async function getride() {
         const res = await fetch(
-          `https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1IjoiYmlsbGJvYWgiLCJhIjoiY2wybmoyeGFtMTdsajNvcGs3Mnc3am90NCJ9.FT5UVt4lOypQQfet1kc58A`,
+          `https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1IjoiYmlsbGJvYWgiLCJhIjoiY2xwYWU3ZGUzMDYydzJpcmw4c3hvcHdteSJ9.R0hd7u_Uuh-n-euSJTXo-w`,
         )
         if (!res.ok) {
           router.push('/search')
+          throw new Error(`Network response was not ok: ${res.status}`)
         }
         const data = await res.json()
         let duration = data.routes[0].duration

@@ -1,8 +1,9 @@
 import { carList } from "../../../Components/data/carList";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import { NextApiRequest, NextApiResponse } from "next";
+
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 interface Car {
   imgUrl: string;
@@ -15,7 +16,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const userSession = await getServerSession(req, res, authOptions);
-  const { selectedCar, rideDuration } = req.body;
+  const { selectedCar, rideDuration, pick_up, drop_off } = req.body;
   const car: Car | undefined = carList.find(
     (obj) => obj.service === selectedCar
   );
@@ -53,9 +54,15 @@ export default async function handler(
           },
         ],
         mode: "payment",
-        success_url: `${req.headers.origin}/ordered`,
+        metadata: {
+          email: userSession.user.email,
+          images: [car.imgUrl],
+          name: selectedCar,
+          pick_up: pick_up,
+          drop_off: drop_off,
+        },
+        success_url: `${req.headers.origin}/success/?sessionId={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
-        customer_email: userSession.user.email,
       });
 
       res.status(201).json({ sessionId: session.id });

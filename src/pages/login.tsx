@@ -20,8 +20,10 @@ const Login = () => {
     }
   }, [status])
 
-  const handleOAuthSignIn = (provider: string) => () =>
+  const handleOAuthSignIn = (provider: string) => {
+    setLoginLoading(true)
     signIn(provider, { redirect: false, callbackUrl: '/' })
+  }
 
   return (
     <ComponentLayout>
@@ -46,7 +48,7 @@ const Login = () => {
         <button
           className={loginLoading ? 'button-disable' : 'button'}
           disabled={loginLoading}
-          onClick={handleOAuthSignIn('google')}
+          onClick={()=>handleOAuthSignIn('google')}
           name='signIn button'
         >
           {loginLoading ? (
