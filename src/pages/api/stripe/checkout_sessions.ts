@@ -35,7 +35,7 @@ export default async function handler(
         return;
       }
 
-      const carPrice = Number((rideDuration * car.multiplier).toFixed(2));
+      const carPrice = Math.round(rideDuration * car.multiplier);
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -48,7 +48,7 @@ export default async function handler(
               product_data: {
                 description: `You have ordered ${selectedCar} and it will be around in 5 minutes`,
                 name: selectedCar,
-                images: [car.imgUrl],
+                images: [String(car.imgUrl)],
               },
             },
           },
@@ -56,12 +56,12 @@ export default async function handler(
         mode: "payment",
         metadata: {
           email: userSession.user.email,
-          images: [car.imgUrl],
-          name: selectedCar,
           pick_up: pick_up,
           drop_off: drop_off,
+          images: [car.imgUrl],
+          name: selectedCar,
         },
-        success_url: `${req.headers.origin}/success/?sessionId={CHECKOUT_SESSION_ID}`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
 

@@ -98,7 +98,7 @@ const Confirm = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setApiError("");
-    }, 5000);
+    }, 10000);
 
     return () => {
       clearTimeout(timeout);

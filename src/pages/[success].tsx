@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ComponentLayout } from "./layout";
-import { selectCheckoutSessionId } from "@/state/features/locationSlice";
-import { useSelector } from "react-redux";
-import router from "next/router";
+import { useRouter } from "next/router";
+import Map from "../Components/map";
 
 const Success = () => {
-  const { sessionId } = router.query;
-  const [successData, setSuccessData] = useState({});
+  const router = useRouter();
+  const { session_id } = router.query;
+  const [successData, setSuccessData] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
+  const sessionId = session_id;
 
   useEffect(() => {
     const fetchSuccessData = async () => {
       if (sessionId) {
         try {
-          const response = await fetch(`/api/sessions/${sessionId}`);
+          const response = await fetch(`/api/stripe/${sessionId}`);
           const data = await response.json();
           setSuccessData(data);
         } catch (error: any) {
@@ -40,21 +41,33 @@ const Success = () => {
 
   return (
     <ComponentLayout>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-[40px] font-bold">
-          You have successfully ordered Uber service
-        </h1>
-        <p className="text-[20px]">
-          The uber service car will be here in the next five minutes
-        </p>
-        <p className="flex justify-center items-center">
-          <Link href="/" passHref={true} className="button">
-            Go to homepage
-          </Link>
-          <Link href="/" passHref={true} className="button">
-            Visit Orders
-          </Link>
-        </p>
+      <div className="relative">
+        <div>
+          <div className="h-screen ">
+            <Map />
+          </div>
+        </div>
+        <div className="bg-black bg-opacity-50 absolute top-0 left-0 h-screen w-full flex justify-center items-center">
+          <div className="flex flex-col items-center justify-center  bg-white rounded-md p-[20px]">
+            <h1 className="text-[30px] text-center font-bold">
+              Booking successful!
+            </h1>
+            <p className="">Booking has been confirm</p>
+            <p className="">Driver will pick you up in 5 minutes</p>
+            <div className="flex justify-center items-center">
+              <Link href="/" passHref={true} className="button w-[200px] m-1">
+                Home
+              </Link>
+              <Link
+                href="/orders"
+                passHref={true}
+                className="button w-[200px] m-1"
+              >
+                My History
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </ComponentLayout>
   );

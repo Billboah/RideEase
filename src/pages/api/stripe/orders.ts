@@ -17,12 +17,14 @@ export default async function handler(
       return;
     }
 
-    const userId = userSession.user.id;
+    const userEmail = userSession.user.email;
 
     try {
-      const paymentSession = await paymentsession.find({ user: userId }).sort({
-        updatedAt: -1,
-      });
+      const paymentSession = await paymentsession
+        .find({ user_email: userEmail })
+        .sort({
+          updatedAt: -1,
+        });
 
       res.status(200).json(paymentSession);
     } catch (error: any) {
