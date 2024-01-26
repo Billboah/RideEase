@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ComponentLayout } from "./layout";
@@ -63,7 +64,7 @@ const Order = () => {
           <div className="h-1/3 md:h-full">
             <Map />
           </div>
-          <div className="bg-white flex h-2/3  flex-col rounded-md md:absolute md:left-0 md:top-0 md:h-[85vh] md:w-1/2 "></div>
+          <div className="bg-white flex h-2/3  flex-col rounded-md md:absolute md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-md"></div>
         </div>
       </div>
       <div

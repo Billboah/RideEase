@@ -1,8 +1,9 @@
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useRouter } from 'next/router'
+import { FadeLoading } from '@/config/appLoading'
 
-function SavePlaces({ pickup, id, dropoff, deleteLocationItem }) {
+function SavePlaces({ pickup, id, dropoff, deleteLocationItem, deletePlaceLoading }) {
   const router = useRouter()
 
   const findLocation = () => {
@@ -17,7 +18,7 @@ function SavePlaces({ pickup, id, dropoff, deleteLocationItem }) {
 
   return (
     <div>
-      <li className='group ml-[35px] flex w-full justify-between p-[5px] hover:bg-gray-100 active:bg-gray-200'>
+      <li className='group flex w-full justify-between px-[15px] py-[7px] hover:bg-gray-100 active:bg-gray-200'>
         <button onClick={findLocation} className='flex-1 text-left'>
           <div>
             <span className='font-bold'>From:</span>
@@ -26,8 +27,8 @@ function SavePlaces({ pickup, id, dropoff, deleteLocationItem }) {
             <span className='mx-[5px] capitalize'>{dropoff}</span>
           </div>
         </button>
-        <button className='' onClick={() => deleteLocationItem(id)}>
-          <DeleteIcon />
+        <button className='' onClick={() => deleteLocationItem(id)} disabled={deletePlaceLoading[id]}>
+          {deletePlaceLoading[id] ? (<div className='mb-[-20px] mr-[-20px] p-2'><FadeLoading height={6} width={3} margin={-12} /></div>):(<DeleteIcon />)}
         </button>
       </li>
     </div>

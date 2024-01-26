@@ -48,7 +48,7 @@ export default async function handler(
               product_data: {
                 description: `You have ordered ${selectedCar} and it will be around in 5 minutes`,
                 name: selectedCar,
-                images: [String(car.imgUrl)],
+                images: [car.imgUrl],
               },
             },
           },

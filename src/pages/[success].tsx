@@ -47,7 +47,7 @@ const Success = () => {
             <Map />
           </div>
         </div>
-        <div className="bg-black bg-opacity-50 absolute top-0 left-0 h-screen w-full flex justify-center items-center">
+        <div className="bg-black bg-opacity-50 absolute top-0 left-0 h-screen w-full flex justify-center items-center shadow-md">
           <div className="flex flex-col items-center justify-center  bg-white rounded-md p-[20px]">
             <h1 className="text-[30px] text-center font-bold">
               Booking successful!

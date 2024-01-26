@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { setCarType, setCarDuration } from '../state/features/locationSlice'
@@ -5,11 +6,13 @@ import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { selectCarType } from '../state/features/locationSlice'
+import { FadeLoading } from '@/config/appLoading'
 
 const CarType = ({ car, pickupCoordinates, dropoffCoordinates }) => {
   const selectedCar = useSelector(selectCarType)
   const [rideDuration, setRideDuration] = useState(0)
   const [confirmCar, setConfirmCar] = useState('')
+  const [loadingDuration, setLoadingDuration] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -20,9 +23,9 @@ const CarType = ({ car, pickupCoordinates, dropoffCoordinates }) => {
 
   const ref = React.useRef()
 
-  //Get ride duration from mapbox api
   useEffect(
     () => {
+      setLoadingDuration(true)
       async function getride() {
         const res = await fetch(
           `https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1IjoiYmlsbGJvYWgiLCJhIjoiY2xwYWU3ZGUzMDYydzJpcmw4c3hvcHdteSJ9.R0hd7u_Uuh-n-euSJTXo-w`,
@@ -35,10 +38,11 @@ const CarType = ({ car, pickupCoordinates, dropoffCoordinates }) => {
         let duration = data.routes[0].duration
         setRideDuration(duration / 100)
         setConfirmCar(ref.current?.innerText)
+        setLoadingDuration(false)
       }
       getride()
     },
-    [pickupCoordinates, dropoffCoordinates],
+    [pickupCoordinates, dropoffCoordinates, router],
     confirmCar,
   )
 
@@ -61,9 +65,11 @@ const CarType = ({ car, pickupCoordinates, dropoffCoordinates }) => {
           </div>
           <div className='text-xs text-blue-500'>5 min away</div>
         </div>
-        <div className='text-sm'>
-          {'$' + (rideDuration * car.multiplier).toFixed(2)}
-        </div>
+        {loadingDuration ? <FadeLoading height={5} width={3} margin={-12} /> :
+          <div className='text-sm'>
+            {'$' + (rideDuration * car.multiplier).toFixed(2)}
+          </div>
+        }
       </button>
     </>
   )

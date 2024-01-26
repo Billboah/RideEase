@@ -1,13 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { useEffect, useState } from "react";
 import Map from "../Components/map";
 import { useRouter } from "next/router";
 import RideSelector from "../Components/rideSelector";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectCarType,
   selectCarDuration,
+  setCarType,
 } from "../state/features/locationSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
@@ -26,6 +28,7 @@ const Confirm = () => {
   const [pickupCoordinates, setPickupCoordinates] = useState([0, 0]);
   const [dropoffCoordinates, setDropoffCoordinates] = useState([0, 0]);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const getPickupCoordinates = (pickup: any) => {
     fetch(
@@ -33,7 +36,6 @@ const Confirm = () => {
         new URLSearchParams({
           access_token:
             "pk.eyJ1IjoiYmlsbGJvYWgiLCJhIjoiY2xwYWU3ZGUzMDYydzJpcmw4c3hvcHdteSJ9.R0hd7u_Uuh-n-euSJTXo-w",
-          limit: 1,
         })
     )
       .then((response) => response.json())
@@ -48,7 +50,6 @@ const Confirm = () => {
         new URLSearchParams({
           access_token:
             "pk.eyJ1IjoiYmlsbGJvYWgiLCJhIjoiY2xwYWU3ZGUzMDYydzJpcmw4c3hvcHdteSJ9.R0hd7u_Uuh-n-euSJTXo-w",
-          limit: 1,
         })
     )
       .then((response) => response.json())
@@ -57,9 +58,14 @@ const Confirm = () => {
       });
   };
 
+  const ResetCarType = () => {
+    dispatch(setCarType(""));
+  };
+
   useEffect(() => {
     getPickupCoordinates(pickup);
     getDropoffCoordinates(dropoff);
+    ResetCarType();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -109,7 +115,7 @@ const Confirm = () => {
     <ComponentLayout>
       <div className="flex h-screen flex-col">
         <div className="absolute left-4 top-4 z-10 cursor-pointer rounded-full bg-white shadow-md">
-          <Link href="/search" passHref>
+          <Link href="/search" passHref onClick={ResetCarType}>
             <img
               className="object-container h-full"
               src="https://img.icons8.com/ios-filled/50/000000/left.png"

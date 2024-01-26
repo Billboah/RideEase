@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -5,7 +6,7 @@ import SavePlaces from "../Components/SavePlaces";
 import Map from "../Components/map";
 import axios from "axios";
 import { ComponentLayout } from "./layout";
-import { FadeLoading } from "../config/ChatLoading";
+import { DotsLoading, FadeLoading } from "../config/appLoading";
 
 interface Destination {
   _id: string;
@@ -20,8 +21,13 @@ const Search = () => {
   const [refreshLocation, setRefreshLocation] = useState(true);
   const [apiError, setApiError] = useState("");
   const [placeLoading, setPlaceLoading] = useState(false);
+  const [savePlaceLoading, setSavePlaceLoading] = useState(false);
+  const [deletePlaceLoading, setDeletePlaceLoading] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const saveLocationItem = async () => {
+    setSavePlaceLoading(true);
     const product = {
       pickup: pickup.trim(),
       dropoff: dropoff.trim(),
@@ -29,35 +35,59 @@ const Search = () => {
     try {
       const { data } = await axios.post("/api/destination/create", product);
       setDestination([data, ...destination]);
+      setSavePlaceLoading(false);
     } catch (error: any) {
       if (error.response) {
         setApiError(error.response.data.error);
+        setSavePlaceLoading(false);
       } else if (error.request) {
         alert(
           "Cannot reach the server. Please check your internet connection."
         );
+        setSavePlaceLoading(false);
       } else {
         console.error("Error:", error.message);
+        setSavePlaceLoading(false);
       }
     }
   };
 
   const deleteLocationItem = async (destinationId: string) => {
+    setDeletePlaceLoading((prevSelectLoading: any) => ({
+      ...prevSelectLoading,
+      [destinationId]: true,
+    }));
     try {
       const response = await axios.delete(`/api/destination/${destinationId}`);
       setRefreshLocation(true);
       if (response.status === 200) {
         console.log("Location Deleted successfully");
       }
+      setDeletePlaceLoading((prevSelectLoading: any) => ({
+        ...prevSelectLoading,
+        [destinationId]: false,
+      }));
     } catch (error: any) {
       if (error.response) {
         setApiError(error.response.data.error);
+        setDeletePlaceLoading((prevSelectLoading: any) => ({
+          ...prevSelectLoading,
+          [destinationId]: false,
+        }));
       } else if (error.request) {
         alert(
           "Cannot reach the server. Please check your internet connection."
         );
+        setDeletePlaceLoading((prevSelectLoading: any) => ({
+          ...prevSelectLoading,
+          [destinationId]: false,
+        }));
       } else {
         console.error("Error:", error.message);
+        setDeletePlaceLoading((prevSelectLoading: any) => ({
+          ...prevSelectLoading,
+          [destinationId]: false,
+        }));
       }
     }
   };
@@ -70,15 +100,17 @@ const Search = () => {
       setDestination(data);
       setPlaceLoading(false);
     } catch (error: any) {
-      setPlaceLoading(false);
       if (error.response) {
         setApiError(error.response.data.error);
+        setPlaceLoading(false);
       } else if (error.request) {
         alert(
           "Cannot reach the server. Please check your internet connection."
         );
+        setPlaceLoading(false);
       } else {
         console.error("Error:", error.message);
+        setPlaceLoading(false);
       }
     }
   };
@@ -113,7 +145,7 @@ const Search = () => {
           <div className="h-1/3 md:h-full">
             <Map />
           </div>
-          <div className="m-5 flex h-2/3  flex-col rounded-md bg-gray-200 pb-3 md:absolute md:left-0 md:top-0 md:h-[85vh] md:w-1/2 ">
+          <div className="m-5 flex h-2/3  flex-col rounded-md bg-gray-200 pb-3 md:absolute md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-md">
             <div className="mt-5 bg-gray-200 p-4 text-2xl">Where to?</div>
             <div className="mb-3 flex items-center bg-white px-4">
               <div className="z-10 m-2 flex w-10 flex-col items-center">
@@ -150,13 +182,19 @@ const Search = () => {
                   onChange={(e) => setdropoff(e.target.value)}
                 />
               </div>
-              <button onClick={saveLocationItem}>
-                <img
-                  className="ml-3 h-10 w-10 rounded-full bg-gray-200 p-2"
-                  src="https://cdn0.iconfinder.com/data/icons/maps-locations-5/24/map_location_geolocation_pin_save-512.png"
-                  alt="save location"
-                  title="Save destination"
-                />
+              <button onClick={saveLocationItem} disabled={savePlaceLoading}>
+                {savePlaceLoading ? (
+                  <div className="ml-3 h-10 w-10 rounded-full bg-gray-200 pl-[15px] pt-3">
+                    <FadeLoading height={8} width={4} margin={-8} />
+                  </div>
+                ) : (
+                  <img
+                    className="ml-3 h-10 w-10 rounded-full bg-gray-200 p-2"
+                    src="https://cdn0.iconfinder.com/data/icons/maps-locations-5/24/map_location_geolocation_pin_save-512.png"
+                    alt="save location"
+                    title="Save destination"
+                  />
+                )}
                 <div className="sr-only ">Save destination</div>
               </button>
             </div>
@@ -173,21 +211,21 @@ const Search = () => {
 
               <div className="  h-full w-full relative">
                 <div className="h-full w-full">
-                  {placeLoading ? (
-                    <div className="absolute top-1/2 left-1/2">
-                      <FadeLoading height={15} width={5} margin={1} />
+                  {placeLoading && (
+                    <div className="absolute left-[45px] top-[-15px]">
+                      <DotsLoading />
                     </div>
-                  ) : (
-                    destination.map((item: Destination) => (
-                      <SavePlaces
-                        key={item._id}
-                        id={item._id}
-                        pickup={item.pickup}
-                        dropoff={item.dropoff}
-                        deleteLocationItem={deleteLocationItem}
-                      />
-                    ))
                   )}
+                  {destination.map((item: Destination) => (
+                    <SavePlaces
+                      key={item._id}
+                      id={item._id}
+                      pickup={item.pickup}
+                      dropoff={item.dropoff}
+                      deleteLocationItem={deleteLocationItem}
+                      deletePlaceLoading={deletePlaceLoading}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
