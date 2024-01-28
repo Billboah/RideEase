@@ -13,7 +13,7 @@ import {
 } from "../state/features/locationSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { ComponentLayout } from "./layout";
+import ComponentLayout  from "./layout";
 
 const stripePromise = loadStripe(
   "pk_test_51MKjY5AN6Uo13VzBRQfQc1RBF5AmlKyVIQxhtTiVkni1DF272YaLqJzoMMYipVCO7ix2UnuRFVnDZbtVrX1t12qj00SOMGXJJd"

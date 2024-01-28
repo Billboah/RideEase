@@ -5,7 +5,7 @@ import Map from "../Components/map";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
-import { ComponentLayout } from "./layout";
+import  ComponentLayout  from "./layout";
 
 interface UserData {
   name: string;

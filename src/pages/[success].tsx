@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { ComponentLayout } from "./layout";
+import ComponentLayout from "./layout";
 import { useRouter } from "next/router";
 import Map from "../Components/map";
 

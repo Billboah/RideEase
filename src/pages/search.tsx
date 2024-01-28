@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import SavePlaces from "../Components/SavePlaces";
 import Map from "../Components/map";
 import axios from "axios";
-import { ComponentLayout } from "./layout";
+import ComponentLayout  from "./layout";
 import { DotsLoading, FadeLoading } from "../config/appLoading";
 
 interface Destination {

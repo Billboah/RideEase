@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession, signIn } from 'next-auth/react'
-import { ComponentLayout } from './layout'
+import  ComponentLayout  from './layout'
 
 const Login = () => {
   const [loginLoading, setLoginLoading] = useState(false)
