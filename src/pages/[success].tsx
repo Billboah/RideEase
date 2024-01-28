@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ComponentLayout from "./layout";
@@ -50,7 +49,7 @@ const Success = () => {
     successData.metadata && JSON.parse(successData.metadata.car_images)[0];
 
   return (
-    <ComponentLayout>
+    <ComponentLayout pageName="SuccessPage">
       <div className="relative">
         <div>
           <div className="h-screen ">

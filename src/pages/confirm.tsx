@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { useEffect, useState } from "react";
 import Map from "../Components/map";
@@ -112,7 +111,7 @@ const Confirm = () => {
   }, [apiError]);
 
   return (
-    <ComponentLayout>
+    <ComponentLayout pageName='ConfirmPage'>
       <div className="flex h-screen flex-col">
         <div className="absolute left-4 top-4 z-10 cursor-pointer rounded-full bg-white shadow-md">
           <Link href="/search" passHref onClick={ResetCarType}>

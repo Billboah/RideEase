@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import  ComponentLayout  from "./layout";
+import ComponentLayout from "./layout";
 import axios from "axios";
 import Map from "../Components/map";
 
@@ -48,18 +47,7 @@ const Order = () => {
   console.log(orders);
 
   return (
-    <ComponentLayout>
-      <div className="h-screen min-h-fit bg-gray-200">
-        <nav className="bg-black p-4">
-          <Link href="/" passHref>
-            <img
-              className="h-5 cursor-pointer"
-              src="https://companieslogo.com/img/orig/UBER.D-f23d4b1c.png?t=1635007057"
-              alt="back button"
-              title="Home"
-            />
-          </Link>
-        </nav>
+    <ComponentLayout pageName='OrderPage'>
         <div className="relative h-[93vh]">
           <div className="h-1/3 md:h-full">
             <Map />
@@ -68,7 +56,6 @@ const Order = () => {
             <h2 className="font-bold text-[25px]">History</h2>
           </div>
         </div>
-      </div>
       <div
         className={`${
           !apiError ? " hidden" : "animate__fadeInUp"

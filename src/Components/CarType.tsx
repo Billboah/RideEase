@@ -60,7 +60,7 @@ const CarType = ({
       }
     }
     getride();
-  }, [pickupCoordinates, dropoffCoordinates, router]);
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
