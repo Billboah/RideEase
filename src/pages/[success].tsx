@@ -1,13 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ComponentLayout } from "./layout";
 import { useRouter } from "next/router";
 import Map from "../Components/map";
 
+interface CarData {
+  metadata: {
+    car_images: string;
+  };
+}
+
 const Success = () => {
   const router = useRouter();
   const { session_id } = router.query;
-  const [successData, setSuccessData] = useState<any>({});
+  const [successData, setSuccessData] = useState<Partial<CarData> | CarData>(
+    {}
+  );
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
   const sessionId = session_id;
@@ -37,7 +46,8 @@ const Success = () => {
     fetchSuccessData();
   }, [sessionId]);
 
-  console.log(successData);
+  const carImage =
+    successData.metadata && JSON.parse(successData.metadata.car_images)[0];
 
   return (
     <ComponentLayout>
@@ -54,6 +64,11 @@ const Success = () => {
             </h1>
             <p className="">Booking has been confirm</p>
             <p className="">Driver will pick you up in 5 minutes</p>
+            <div>
+              {carImage && (
+                <img src={carImage} alt="" className="w-[150px] w-auto" />
+              )}
+            </div>
             <div className="flex justify-center items-center">
               <Link href="/" passHref={true} className="button w-[200px] m-1">
                 Home

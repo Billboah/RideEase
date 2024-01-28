@@ -64,7 +64,9 @@ const Order = () => {
           <div className="h-1/3 md:h-full">
             <Map />
           </div>
-          <div className="bg-white flex h-2/3  flex-col rounded-md md:absolute md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-md"></div>
+          <div className="h-2/3 bg-white flex flex-col items-center rounded-md md:absolute md:left-0 md:top-0 md:m-5 md:h-[85vh] md:w-[500px] shadow-md">
+            <h2 className="font-bold text-[25px]">History</h2>
+          </div>
         </div>
       </div>
       <div

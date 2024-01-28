@@ -42,7 +42,7 @@ export default async function handler(
           const database_data = {
             price: session.amount_total / 100,
             user_email: session.metadata.email,
-            images: session.metadata.images,
+            images: JSON.parse(session.metadata.car_images),
             uber_type: session.metadata.name,
             pick_up: session.metadata.pick_up,
             drop_off: session.metadata.drop_off,

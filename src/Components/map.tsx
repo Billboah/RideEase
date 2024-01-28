@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 mapboxgl.accessToken =
   'pk.eyJ1IjoiYmlsbGJvYWgiLCJhIjoiY2xwYWU3ZGUzMDYydzJpcmw4c3hvcHdteSJ9.R0hd7u_Uuh-n-euSJTXo-w'
 
-function Map(props) {
+function Map(props: any) {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: 'map',
@@ -29,7 +29,7 @@ function Map(props) {
     }
   }, [props.pickupCoordinates, props.dropoffCoordinates])
 
-  const addToMap = (map, coordinates) => {
+  const addToMap = (map: mapboxgl.Map, coordinates: mapboxgl.LngLatLike) => {
     const marker1 = new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
   }
 
