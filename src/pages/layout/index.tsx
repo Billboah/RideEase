@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, useRef, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 
 interface UserData {
   name: string;
@@ -18,7 +20,8 @@ const ComponentLayout = ({
   const { data: session, status } = useSession();
   const router = useRouter();
   const [user, setUser] = useState<UserData | null>(null);
-  const { asPath } = useRouter();
+  const [history, setHistory] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (session) {
@@ -34,10 +37,25 @@ const ComponentLayout = ({
     }
   }, [session, router]);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setHistory(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  console.log(history);
+
   return (
     <div className="h-full w-full">
-      <div className="h-screen w-full min-w-[320px] bg-white flex flex-col">
-        {pageName !== "ConfirmPage" && pageName !== "SuccessPage" && (
+      <div className="h-screen w-full min-w-[250px] bg-white flex flex-col">
+        {pageName !== "ConfirmPage" && (
           <nav className="flex items-center justify-between bg-black p-3 text-white md:p-5">
             <Link
               href={`${pageName === "LoginPage" ? "#" : "/"}`}
@@ -46,32 +64,55 @@ const ComponentLayout = ({
               }`}
               passHref
             >
-              <img
-                className="h-7 md:h-9"
-                src="https://companieslogo.com/img/orig/UBER.D-f23d4b1c.png?t=1635007057"
+              <Image
+                src="/images/uber-logo.png"
                 alt="uber logo"
+                height={40}
+                width={70}
               />
             </Link>
-            {pageName === "HomePage" && (
-              <div className="flex items-center">
-                <div className="mr-4 w-fit text-sm">{user && user.name}</div>
-                {user && (
-                  <img
-                    className="h-10 w-10 cursor-pointer rounded-full border border-gray-100 p-px"
-                    src={user.photoUrl}
-                    onClick={() =>
-                      signOut({ redirect: false, callbackUrl: "/login" })
-                    }
-                    alt="user image"
-                    title="Sign out"
-                  />
-                )}
-              </div>
-            )}
+            <div className="flex items-center">
+              {pageName === "HomePage" && (
+                <div className="flex items-center">
+                  <button
+                    className="mr-4 font-semibold"
+                    onClick={() => setHistory(true)}
+                  >
+                    History
+                  </button>
+                  <div className="mr-2 w-fit text-sm">{user && user.name}</div>
+                </div>
+              )}
+              {user && (
+                <img
+                  className={`h-10 w-10 ${
+                    pageName === "HomePage"
+                      ? "cursor-pointer"
+                      : "cursor-default"
+                  } rounded-full border border-gray-100 p-px`}
+                  src={user.photoUrl}
+                  onClick={() =>
+                    pageName === "HomePage" &&
+                    signOut({ redirect: false, callbackUrl: "/login" })
+                  }
+                  alt="user image"
+                  title={`${pageName === "HomePage" ? "Sign out" : ""}`}
+                />
+              )}
+            </div>
           </nav>
         )}
         <div className="h-full w-full">{children}</div>
       </div>
+      {history && (
+        <div className="h-screen w-full bg-black bg-opacity-60 flex justify-center items-center absolute top-0 left-0">
+          <div className="h-[400px] w-[300px] bg-white rounded-md " ref={ref}>
+            <div className="w-full text-sm text-center border-t border-gray-200 my-3 text-gray-500">
+              <Link href="/orders">View More</Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

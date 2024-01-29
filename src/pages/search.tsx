@@ -6,6 +6,7 @@ import Map from "../Components/map";
 import axios from "axios";
 import ComponentLayout from "./layout";
 import { DotsLoading, FadeLoading } from "../config/appLoading";
+import Image from "next/image";
 
 interface Destination {
   _id: string;
@@ -133,39 +134,48 @@ const Search = () => {
         <div className="h-1/3 md:h-full">
           <Map />
         </div>
-        <div className="m-5 flex h-2/3  flex-col rounded-md bg-gray-200 pb-3 md:absolute md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-md">
-          <div className="mt-5 bg-gray-200 p-4 text-2xl">Where to?</div>
+        <div className=" flex h-2/3  flex-col rounded-md bg-gray-200 pb-3 md:absolute md:m-5 md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-md">
+          <div className="bg-gray-200 text-gray-500 px-4 py-1 text-2xl">
+            Go anywhere with Uber
+          </div>
+          <div className="bg-gray-200 px-4 ">
+            Request a ride, hop in, and go
+          </div>
           <div className="mb-3 flex items-center bg-white px-4">
-            <div className="z-10 m-2 flex w-10 flex-col items-center">
-              <img
-                className="h-1.5"
+            <div className="z-10 ml-2 flex w-10 flex-col items-center">
+              <Image
                 alt=""
-                src="https://img.icons8.com/ios-filled/50/000000/filled-circle.png"
+                src="/images/filled-circle.png"
+                height={6}
+                width={6}
                 aria-hidden
               />
-              <img
+              <Image
                 className="my-1.5 h-10"
                 alt=""
-                src="https://img.icons8.com/ios/50/000000/vertical-line.png"
+                src="/images/vertical-line.png"
+                height={30}
+                width={10}
                 aria-hidden
               />
-              <img
-                className="h-2"
+              <Image
                 alt=""
-                src="https://img.icons8.com/windows/50/000000/square-full.png"
+                src="/images/square-full.png"
+                height={8}
+                width={8}
                 aria-hidden
               />
             </div>
             <div className="flex flex-1 flex-col">
               <input
-                className="z-index-10 my-2 ml-[-55px] h-10  rounded-md border-none bg-gray-200 pl-16 capitalize outline-none"
-                placeholder="Enter pickup location"
+                className="z-index-10 my-2 ml-[-40px] h-10  rounded-md border-none bg-gray-200 pl-10 capitalize outline-none"
+                placeholder="Enter location"
                 value={pickup}
                 onChange={(e) => setpickup(e.target.value)}
               />
               <input
-                className="z-index-10 my-2 ml-[-55px] h-10  rounded-md border-none bg-gray-200 pl-16 capitalize outline-none"
-                placeholder="Enter your destination"
+                className="z-index-10 my-2 ml-[-40px] h-10  rounded-md border-none bg-gray-200 pl-10 capitalize outline-none"
+                placeholder="Enter destination"
                 value={dropoff}
                 onChange={(e) => setdropoff(e.target.value)}
               />
@@ -176,9 +186,11 @@ const Search = () => {
                   <FadeLoading height={8} width={4} margin={-8} />
                 </div>
               ) : (
-                <img
-                  className="ml-3 h-10 w-10 rounded-full bg-gray-200 p-2"
-                  src="https://cdn0.iconfinder.com/data/icons/maps-locations-5/24/map_location_geolocation_pin_save-512.png"
+                <Image
+                  className="ml-3 rounded-full bg-gray-200 p-2"
+                  src="/images/save.png"
+                  height={50}
+                  width={40}
                   alt="save location"
                   title="Save destination"
                 />
@@ -188,10 +200,12 @@ const Search = () => {
           </div>
           <div className="flex h-full  w-full flex-1  flex-col  overflow-y-scroll bg-white py-[10px] ">
             <div className="my-1 flex items-center bg-white px-4 py-2">
-              <img
-                className="mr-2 h-10 rounded-full bg-gray-400 p-2"
+              <Image
+                className="mr-2 rounded-full bg-gray-400 p-1"
                 alt=""
-                src="https://img.icons8.com/ios/50/ffffff/star--v1.png"
+                height={30}
+                width={30}
+                src="/images/star.png"
                 aria-hidden
               />
               Saved Places

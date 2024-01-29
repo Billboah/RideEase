@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ComponentLayout from "./layout";
@@ -49,41 +50,39 @@ const Success = () => {
     successData.metadata && JSON.parse(successData.metadata.car_images)[0];
 
   return (
-    <ComponentLayout pageName="SuccessPage">
-      <div className="relative">
-        <div>
-          <div className="h-screen ">
-            <Map />
-          </div>
+    <div className="relative">
+      <div>
+        <div className="h-screen ">
+          <Map />
         </div>
-        <div className="bg-black bg-opacity-50 absolute top-0 left-0 h-screen w-full flex justify-center items-center shadow-md">
-          <div className="flex flex-col items-center justify-center  bg-white rounded-md p-[20px]">
-            <h1 className="text-[30px] text-center font-bold">
-              Booking successful!
-            </h1>
-            <p className="">Booking has been confirm</p>
-            <p className="">Driver will pick you up in 5 minutes</p>
-            <div>
-              {carImage && (
-                <img src={carImage} alt="" className="w-[150px] w-auto" />
-              )}
-            </div>
-            <div className="flex justify-center items-center">
-              <Link href="/" passHref={true} className="button w-[200px] m-1">
-                Home
-              </Link>
-              <Link
-                href="/orders"
-                passHref={true}
-                className="button w-[200px] m-1"
-              >
-                My History
-              </Link>
-            </div>
+      </div>
+      <div className="bg-black bg-opacity-50 absolute top-0 left-0 h-screen w-full flex justify-center items-center shadow-md">
+        <div className="flex flex-col items-center justify-center  bg-white rounded-md p-[10px] sm:p-[20px]">
+          <h1 className="text-[25px] text-center font-bold">
+            Booking successful!
+          </h1>
+          <p className="">Booking has been confirm</p>
+          <p className="">Driver will pick you up in 5 minutes</p>
+          <div>
+            {carImage && (
+              <img src={carImage} alt="" className="w-[150px] w-auto" />
+            )}
+          </div>
+          <div className="flex justify-center items-center">
+            <Link href="/" passHref={true} className="button w-[120px] m-1">
+              Home
+            </Link>
+            <Link
+              href="/orders"
+              passHref={true}
+              className="button w-[120px] m-1"
+            >
+              My History
+            </Link>
           </div>
         </div>
       </div>
-    </ComponentLayout>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession, signIn } from "next-auth/react";
 import ComponentLayout from "./layout";
+import Image from "next/image";
 
 const Login = () => {
   const [loginLoading, setLoginLoading] = useState(false);
@@ -28,13 +29,16 @@ const Login = () => {
 
   return (
     <ComponentLayout pageName="LoginPage">
-      <div className="flex flex-col p-4 lg:flex-row">
+      <div className="flex portrait:flex-col p-4 landscape:flex-row">
         <div className="pt-4 text-5xl text-gray-500">
           Log in to access your account
         </div>
-        <img
-          className="w-full object-contain lg:w-2/3"
-          src="https://i.ibb.co/CsV9RYZ/login-image.png"
+        <Image
+          className="object-contain lg:w-2/3"
+          src="/images/uber-login-image.png"
+          height={200}
+          width={200}
+          layout="responsive"
           alt="uber image"
         />
       </div>

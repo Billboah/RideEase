@@ -12,7 +12,8 @@ import {
 } from "../state/features/locationSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import ComponentLayout  from "./layout";
+import ComponentLayout from "./layout";
+import Image from "next/image";
 
 const stripePromise = loadStripe(
   "pk_test_51MKjY5AN6Uo13VzBRQfQc1RBF5AmlKyVIQxhtTiVkni1DF272YaLqJzoMMYipVCO7ix2UnuRFVnDZbtVrX1t12qj00SOMGXJJd"
@@ -111,13 +112,15 @@ const Confirm = () => {
   }, [apiError]);
 
   return (
-    <ComponentLayout pageName='ConfirmPage'>
+    <ComponentLayout pageName="ConfirmPage">
       <div className="flex h-screen flex-col">
         <div className="absolute left-4 top-4 z-10 cursor-pointer rounded-full bg-white shadow-md">
           <Link href="/search" passHref onClick={ResetCarType}>
-            <img
-              className="object-container h-full"
-              src="https://img.icons8.com/ios-filled/50/000000/left.png"
+            <Image
+              className="object-container "
+              src="/images/leftarrow.png"
+              height={35}
+              width={45}
               alt="back button"
             />
           </Link>

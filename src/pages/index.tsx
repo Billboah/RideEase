@@ -2,6 +2,7 @@ import React from "react";
 import Map from "../Components/map";
 import Link from "next/link";
 import ComponentLayout from "./layout";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -17,33 +18,26 @@ export default function Home() {
               passHref={true}
               className="flex h-full w-full flex-col items-center justify-center"
             >
-              <img
-                className="h-3/5"
-                src="https://i.ibb.co/cyvcpfF/uberx.png"
-                alt=""
-              />
+              <Image src="/images/uberX.png" alt="" height={50} width={80} />
               Ride
             </Link>
           </button>
           <button className="lg:45 m-1 flex h-32 flex-1 transform flex-col items-center justify-center rounded-lg bg-gray-200 text-xl transition hover:scale-105 active:scale-100 md:h-40">
-            <img
-              className="h-3/5"
-              src="https://i.ibb.co/n776JLm/bike.png"
-              alt=""
-            />
+            <Image src="/images/bike.png" alt="" height={50} width={80} />
             Wheels
           </button>
           <button className="lg:45 m-1 flex h-32 flex-1 transform flex-col items-center justify-center rounded-lg bg-gray-200 text-xl transition hover:scale-105 active:scale-100 md:h-40">
-            <img
-              className="h-3/5"
-              src="https://i.ibb.co/5RjchBg/uberschedule.png"
+            <Image
+              src="/images/uberschedule.png"
               alt=""
+              height={50}
+              width={80}
             />
             Reserve
           </button>
         </div>
-        <div className="m-1  bg-gray-200 p-1 text-2xl ">
-          <p>Where to? </p>
+        <div className="mt-3 mx-2 text-gray-400 text-2xl font-bold ">
+          <p>Always the ride you want </p>
         </div>
       </div>
     </ComponentLayout>

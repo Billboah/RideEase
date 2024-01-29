@@ -41,9 +41,7 @@ const CarType = ({
         );
         const data = await res.json();
         let duration = data.routes[0].duration;
-        console.log(duration);
         setRideDuration(duration / 100);
-        console.log(duration);
         setLoadingDuration(false);
       } catch (error: any) {
         if (error.response) {
@@ -60,7 +58,7 @@ const CarType = ({
       }
     }
     getride();
-  }, []);
+  }, [router, dropoffCoordinates, pickupCoordinates]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
