@@ -32,7 +32,7 @@ const SavePlaces: React.FC<SavePlacesProps> = ({
 
   return (
     <div>
-      <li className="group flex w-full justify-between px-[15px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
+      <div className="group flex w-full justify-between px-[15px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
         <button onClick={findLocation} className="flex-1 text-left">
           <div>
             <span className="font-bold">From:</span>
@@ -54,7 +54,7 @@ const SavePlaces: React.FC<SavePlacesProps> = ({
             <DeleteIcon />
           )}
         </button>
-      </li>
+      </div>
     </div>
   );
 };
