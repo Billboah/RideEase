@@ -56,6 +56,16 @@ const Success = () => {
   const carImage =
     successData.metadata && JSON.parse(successData.metadata.car_images)[0];
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setApiError("");
+    }, 10000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [apiError]);
+
   return (
     <div className="relative">
       <div>
@@ -96,6 +106,15 @@ const Success = () => {
               My History
             </Link>
           </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          !apiError ? "hidden" : "animate__fadeInUp"
+        } animate__animated animate__delay-300ms absolute  bottom-[20px] flex h-fit w-full items-center justify-center p-[10px] `}
+      >
+        <div className="flex h-fit w-full max-w-[500px] items-center justify-center rounded border border-inherit bg-red-500 px-1 py-2 text-white shadow-lg">
+          <p className="text-center font-semibold">{apiError}</p>
         </div>
       </div>
     </div>

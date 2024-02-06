@@ -73,20 +73,22 @@ const CarType = ({
   return (
     <>
       <button
-        className={`flex w-full items-center p-4 hover:bg-gray-100 active:bg-white ${
+        className={`flex w-full h-[80px] justify-between items-center p-4 hover:bg-gray-100 active:bg-white ${
           selectedCar === car.service ? "bg-gray-100" : "bg-white"
         }`}
         disabled={loadingDuration}
         onClick={SelectACar}
       >
-        <img
-          className="mr-4 h-14"
-          src={car.imgUrl}
-          alt={`${car.service} image`}
-        />
-        <div className="flex flex-1 flex-col items-start">
-          <div className="font-medium">{car.service}</div>
-          <div className="text-xs text-blue-500">5 min away</div>
+        <div className="flex items-center justify-start">
+          <img
+            className="mr-4 h-[55px] w-auto "
+            src={car.imgUrl}
+            alt={`${car.service} image`}
+          />
+          <div className="flex flex-1 flex-col items-start">
+            <div className="font-medium">{car.service}</div>
+            <div className="text-xs text-blue-500">5 min away</div>
+          </div>
         </div>
         {loadingDuration ? (
           <div className="pt-[20px]">
