@@ -4,10 +4,12 @@ import Link from "next/link";
 import ComponentLayout from "./layout";
 import { useRouter } from "next/router";
 import Map from "../Components/map";
+import { ClipLoading } from "@/config/appLoading";
 
 interface CarData {
   metadata: {
     car_images: string;
+    uber_type: string;
   };
 }
 
@@ -24,19 +26,24 @@ const Success = () => {
   useEffect(() => {
     const fetchSuccessData = async () => {
       if (sessionId) {
+        setLoading(true);
         try {
           const response = await fetch(`/api/stripe/${sessionId}`);
           const data = await response.json();
           setSuccessData(data);
+          setLoading(false);
         } catch (error: any) {
           setLoading(false);
           if (error.response) {
+            setLoading(false);
             setApiError(error.response.data.error);
           } else if (error.request) {
+            setLoading(false);
             alert(
               "Cannot reach the server. Please check your internet connection."
             );
           } else {
+            setLoading(false);
             console.error("Error:", error.message);
           }
         }
@@ -63,17 +70,26 @@ const Success = () => {
           </h1>
           <p className="">Booking has been confirm</p>
           <p className="">Driver will pick you up in 5 minutes</p>
-          <div>
-            {carImage && (
-              <img src={carImage} alt="" className="w-[150px] w-auto" />
-            )}
-          </div>
+          {loading ? (
+            <ClipLoading size={40} />
+          ) : (
+            <div>
+              {carImage && (
+                <img src={carImage} alt="" className="w-[150px] w-auto" />
+              )}
+              {successData.metadata && (
+                <p className="text-gray-400 font-bold">
+                  {successData.metadata.uber_type}
+                </p>
+              )}
+            </div>
+          )}
           <div className="flex justify-center items-center">
             <Link href="/" passHref={true} className="button w-[120px] m-1">
               Home
             </Link>
             <Link
-              href="/orders"
+              href="/histories"
               passHref={true}
               className="button w-[120px] m-1"
             >

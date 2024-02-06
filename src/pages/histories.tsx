@@ -3,17 +3,19 @@ import Link from "next/link";
 import ComponentLayout from "./layout";
 import axios from "axios";
 import Map from "../Components/map";
+import { ClipLoading } from "@/config/appLoading";
+import Trip from "@/Components/Trip";
 
 const Order = () => {
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
-  const [orders, setOrders] = useState([]);
+  const [trips, setTrips] = useState([]);
 
-  const displayOrders = async () => {
+  const displayHistories = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`/api/stripe/orders`);
-      setOrders(data);
+      const { data } = await axios.get(`/api/stripe/trips`);
+      setTrips(data);
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
@@ -29,10 +31,10 @@ const Order = () => {
     }
   };
   useEffect(() => {
-    displayOrders();
+    displayHistories();
   }, []);
 
-  console.log(orders);
+  console.log(trips);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -44,18 +46,32 @@ const Order = () => {
     };
   }, [apiError]);
 
-  console.log(orders);
-
   return (
-    <ComponentLayout pageName='OrderPage'>
-        <div className="relative h-[93vh]">
-          <div className="h-1/3 md:h-full">
-            <Map />
-          </div>
-          <div className="h-2/3 bg-white flex flex-col items-center rounded-md md:absolute md:left-0 md:top-0 md:m-5 md:h-[85vh] md:w-[500px] shadow-md">
-            <h2 className="font-bold text-[25px]">History</h2>
-          </div>
+    <ComponentLayout pageName="OrderPage">
+      <div className="relative h-full">
+        <div className="h-1/3 md:h-full">
+          <Map />
         </div>
+        <div className="h-2/3 bg-white overflow-y-scroll flex flex-col items-center rounded-md md:absolute md:left-0 md:top-0 md:m-5 md:h-[85vh] md:w-[500px] shadow-md">
+          <h2 className="w-full text-center font-bold text-[25px] border-b border-gray-300">
+            Trips
+          </h2>
+          {loading ? (
+            <ClipLoading size={40} />
+          ) : !trips ? (
+            <p>You have no trip history to display</p>
+          ) : (
+            trips.map((trip: any) => (
+              <div
+                key={trip._id}
+                className="h-full w-full py-3 border-b border-gray-300"
+              >
+                <Trip trip={trip} />
+              </div>
+            ))
+          )}
+        </div>
+      </div>
       <div
         className={`${
           !apiError ? " hidden" : "animate__fadeInUp"

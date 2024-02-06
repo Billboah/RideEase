@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectCarType } from "../state/features/locationSlice";
 import { FadeLoading } from "@/config/appLoading";
-import { Car } from "@/types";
+import { Car } from "../../types";
 
 const CarType = ({
   car,

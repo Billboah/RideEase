@@ -12,19 +12,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    let event = req.body;
+    let event: any;
 
     if (endpointSecret) {
-      const signature = req.headers["stripe-signature"];
+      const sig = req.headers["stripe-signature"];
+
       try {
-        event = stripe.webhooks.constructEvent(
-          req.body,
-          signature,
-          endpointSecret
-        );
+        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
       } catch (err: any) {
-        console.log(`⚠️  Webhook signature verification failed.`, err.message);
-        return res.status(400);
+        res.status(400).send(`Webhook Error: ${err.message}`);
       }
     }
 
@@ -58,6 +54,6 @@ export default async function handler(
         console.log("Internal surface error");
       }
     }
-    res.status(400);
+    res.status(200).end();
   }
 }

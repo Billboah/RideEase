@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^2.3.0",
     "animate.css": "^4.1.1",
     "axios": "^1.6.5",
+    "date-fns": "^2.30.0",
     "mapbox-gl": "^3.0.1",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.4",
