@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { format, isToday, isYesterday, isSameWeek, isSameYear } from "date-fns";
+import { format, isToday, isYesterday } from "date-fns";
 
 const Trip = ({ trip }: { trip: any }) => {
   const uberImage = trip && trip.images;
@@ -38,7 +38,7 @@ const Trip = ({ trip }: { trip: any }) => {
           <img src={uberImage} alt="" className="h-[130px] w-[130px]" />
           <p className="text-gray-400 font-bold">{trip.uber_type}</p>
         </div>
-        <p className="text-blue-300 font-semibold capitalize">
+        <p className="text-blue-400 font-semibold capitalize">
           {`From ${trip.pick_up} to ${trip.drop_off}`}
         </p>
       </div>

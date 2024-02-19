@@ -130,15 +130,15 @@ const Search = () => {
 
   return (
     <ComponentLayout pageName="SearchPage">
-      <div className="relative h-[93vh]">
+      <div className="relative h-full">
         <div className="h-1/3 md:h-full">
           <Map />
         </div>
-        <div className=" flex h-2/3  flex-col rounded-md bg-gray-200 pb-3 md:absolute md:m-5 md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-md">
-          <div className="bg-gray-200 text-gray-500 px-4 py-1 text-2xl">
+        <div className=" flex h-2/3  flex-col md:rounded-md pb-2 md:pb-0 bg-gray-200 md:absolute md:m-5 md:left-0 md:top-0 md:h-[85vh] md:w-1/2 shadow-lg">
+          <div className="bg-gray-200 text-gray-500 px-4 py-1 text-2xl md:rounded-t-md">
             Go anywhere with Uber
           </div>
-          <div className="bg-gray-200 px-4 ">
+          <div className="bg-gray-200 py-2 px-4 ">
             Request a ride, hop in, and go
           </div>
           <div className="mb-3 flex items-center bg-white px-4">
@@ -198,7 +198,7 @@ const Search = () => {
               <div className="sr-only ">Save destination</div>
             </button>
           </div>
-          <div className="flex h-full  w-full flex-1  flex-col  overflow-y-scroll bg-white py-[10px] ">
+          <div className="flex-1 w-full flex flex-col  overflow-y-scroll bg-white py-[10px] ">
             <div className="my-1 flex items-center bg-white px-4 py-2">
               <Image
                 className="mr-2 rounded-full bg-gray-400 p-1"
@@ -236,7 +236,7 @@ const Search = () => {
               pickup.trim() === "" || dropoff.trim() === ""
                 ? "button-disable"
                 : "button"
-            } text=2xl   my-2 `}
+            } text-lg`}
             href={
               pickup.trim() === "" || dropoff.trim() === ""
                 ? "#"

@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Map from "../Components/map";
 import { useRouter } from "next/router";
-import RideSelector from "../Components/rideSelector";
+import { carList } from "../Components/data/carList";
+import CarType from "../Components/CarType";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -113,7 +114,7 @@ const Confirm = () => {
 
   return (
     <ComponentLayout pageName="ConfirmPage">
-      <div className="flex h-screen flex-col">
+      <div className="h-full flex flex-col">
         <div className="absolute left-4 top-4 z-10 cursor-pointer rounded-full bg-white shadow-md">
           <Link href="/search" passHref onClick={ResetCarType}>
             <Image
@@ -125,16 +126,24 @@ const Confirm = () => {
             />
           </Link>
         </div>
-        <Map
-          pickupCoordinates={pickupCoordinates}
-          dropoffCoordinates={dropoffCoordinates}
-        />
-        <div className="flex h-1/2 flex-1 flex-col">
-          <RideSelector
+        <div className="h-1/2">
+          <Map
             pickupCoordinates={pickupCoordinates}
             dropoffCoordinates={dropoffCoordinates}
           />
-          <div className="py-2">
+        </div>
+        <div className="h-1/2 flex flex-col">
+          <div className="flex-1 overflow-y-scroll">
+            {carList.map((car, index) => (
+              <CarType
+                key={index}
+                car={car}
+                pickupCoordinates={pickupCoordinates}
+                dropoffCoordinates={dropoffCoordinates}
+              />
+            ))}
+          </div>
+          <div className="pb-2">
             <button
               className={selectedCar && !loading ? "button" : "button-disable"}
               disabled={loading || !selectedCar}

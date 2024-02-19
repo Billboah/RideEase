@@ -31,30 +31,28 @@ const SavePlaces: React.FC<SavePlacesProps> = ({
   };
 
   return (
-    <div>
-      <div className="group flex w-full justify-between px-[15px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
-        <button onClick={findLocation} className="flex-1 text-left">
-          <div>
-            <span className="font-bold">From:</span>
-            <span className="mx-[5px] capitalize">{pickup}</span>
-            <span className="ml-[5px] font-bold">To:</span>
-            <span className="mx-[5px] capitalize">{dropoff}</span>
+    <div className="w-full flex justify-between px-[15px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
+      <button onClick={findLocation} className="">
+        <p className="text-left text-[18px]">
+          <span className="font-bold">From:</span>
+          <span className="mx-[5px] capitalize">{pickup}</span>
+          <span className="ml-[5px] font-bold">To:</span>
+          <span className="mx-[5px] capitalize">{dropoff}</span>
+        </p>
+      </button>
+      <button
+        className=""
+        onClick={() => deleteLocationItem(id)}
+        disabled={deletePlaceLoading[id]}
+      >
+        {deletePlaceLoading[id] ? (
+          <div className="mb-[-20px] mr-[-20px] p-2">
+            <FadeLoading height={6} width={3} margin={-12} />
           </div>
-        </button>
-        <button
-          className=""
-          onClick={() => deleteLocationItem(id)}
-          disabled={deletePlaceLoading[id]}
-        >
-          {deletePlaceLoading[id] ? (
-            <div className="mb-[-20px] mr-[-20px] p-2">
-              <FadeLoading height={6} width={3} margin={-12} />
-            </div>
-          ) : (
-            <DeleteIcon />
-          )}
-        </button>
-      </div>
+        ) : (
+          <DeleteIcon />
+        )}
+      </button>
     </div>
   );
 };

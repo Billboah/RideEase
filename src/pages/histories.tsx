@@ -34,8 +34,6 @@ const Order = () => {
     displayHistories();
   }, []);
 
-  console.log(trips);
-
   useEffect(() => {
     const timeout = setTimeout(() => {
       setApiError("");

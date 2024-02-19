@@ -30,17 +30,24 @@ const ComponentLayout = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let timeoutId: string | number | NodeJS.Timeout | undefined;
+
     if (session) {
       setUser({
         name: session.user.name,
         photoUrl: session.user.image,
       });
+      clearTimeout(timeoutId);
     } else {
       setUser(null);
       if (router.pathname !== "/login") {
-        router.push("/login");
+        timeoutId = setTimeout(() => {
+          router.push("/login");
+        }, 30000);
       }
     }
+
+    return () => clearTimeout(timeoutId);
   }, [session, router]);
 
   const displayHistory = async () => {
@@ -88,10 +95,10 @@ const ComponentLayout = ({
   }, []);
 
   return (
-    <div className="h-full w-full">
-      <div className="h-screen w-full min-w-[250px] bg-white flex flex-col">
+    <div className="h-screen w-full">
+      <div className="h-full w-full min-w-[250px] bg-white flex flex-col">
         {pageName !== "ConfirmPage" && (
-          <nav className="flex items-center justify-between bg-black p-3 text-white md:p-5">
+          <nav className="h-[70px] px-4 flex items-center justify-between bg-black text-white">
             <Link
               href={`${pageName === "LoginPage" ? "#" : "/"}`}
               className={`${
@@ -137,7 +144,7 @@ const ComponentLayout = ({
             </div>
           </nav>
         )}
-        <div className="h-full w-full">{children}</div>
+        <div className="flex-1">{children}</div>
       </div>
       {history && (
         <div className="h-screen w-full bg-black bg-opacity-60 flex justify-center items-center absolute top-0 left-0">

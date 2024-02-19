@@ -28,16 +28,24 @@ const Login = () => {
   };
 
   return (
-    <ComponentLayout pageName="LoginPage">
+    <div className="h-fit w-full min-h-screen bg-white">
+      <nav className="h-[70px] px-4 flex items-center justify-between bg-black text-white">
+        <Image
+          src="/images/uber-logo.png"
+          alt="uber logo"
+          height={40}
+          width={70}
+        />
+      </nav>
       <div className="flex portrait:flex-col p-4 landscape:flex-row">
-        <div className="pt-4 text-5xl text-gray-500">
+        <div className="pt-4 text-3xl md:text-5xl text-gray-500">
           Log in to access your account
         </div>
         <Image
-          className="object-contain lg:w-2/3"
+          className="object-contain"
           src="/images/uber-login-image.png"
-          height={200}
-          width={200}
+          height={150}
+          width={150}
           layout="responsive"
           alt="uber image"
         />
@@ -50,7 +58,7 @@ const Login = () => {
       >
         {loginLoading ? <div>Loading...</div> : <div>Sign in with Google</div>}
       </button>
-    </ComponentLayout>
+    </div>
   );
 };
 

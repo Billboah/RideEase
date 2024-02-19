@@ -62,7 +62,7 @@ export default async function handler(
           car_images: JSON.stringify([car.imgUrl]),
         },
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        cancel_url: `${req.headers.origin}/search/?canceled=true`,
       });
 
       res.status(201).json({ sessionId: session.id });

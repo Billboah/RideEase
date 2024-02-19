@@ -71,9 +71,9 @@ const CarType = ({
   }, [apiError]);
 
   return (
-    <>
+    <div className="h-[100px] w-full m-0 p-0">
       <button
-        className={`flex w-full h-[80px] justify-between items-center p-4 hover:bg-gray-100 active:bg-white ${
+        className={`w-full h-full flex justify-between items-center px-3 hover:bg-gray-100 active:bg-white ${
           selectedCar === car.service ? "bg-gray-100" : "bg-white"
         }`}
         disabled={loadingDuration}
@@ -81,7 +81,7 @@ const CarType = ({
       >
         <div className="flex items-center justify-start">
           <img
-            className="mr-4 h-[55px] w-auto "
+            className="h-[70px] w-auto mr-4  "
             src={car.imgUrl}
             alt={`${car.service} image`}
           />
@@ -110,7 +110,7 @@ const CarType = ({
           <p className="text-center font-semibold">{apiError}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

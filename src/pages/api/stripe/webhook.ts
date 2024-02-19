@@ -12,7 +12,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    let event: any;
+    let event = req.body;
 
     if (endpointSecret) {
       const sig = req.headers["stripe-signature"];
