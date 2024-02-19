@@ -31,8 +31,8 @@ const SavePlaces: React.FC<SavePlacesProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-between px-[15px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
-      <button onClick={findLocation} className="">
+    <div className="w-full flex justify-between px-[20px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
+      <button onClick={findLocation} className="flex item-center">
         <p className="text-left text-[18px]">
           <span className="font-bold">From:</span>
           <span className="mx-[5px] capitalize">{pickup}</span>
