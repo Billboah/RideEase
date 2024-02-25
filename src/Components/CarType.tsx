@@ -73,9 +73,9 @@ const CarType = ({
   return (
     <div className="h-[100px] w-full m-0 p-0">
       <button
-        className={`w-full h-full flex justify-between items-center px-3 hover:bg-gray-100 active:bg-white ${
+        className={`w-full h-[100px] px-5 hover:bg-gray-100 active:bg-white ${
           selectedCar === car.service ? "bg-gray-100" : "bg-white"
-        }`}
+        } flex justify-between items-center`}
         disabled={loadingDuration}
         onClick={SelectACar}
       >

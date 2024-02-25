@@ -31,17 +31,17 @@ const SavePlaces: React.FC<SavePlacesProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-between px-[20px] py-[7px] hover:bg-gray-100 active:bg-gray-200">
-      <button onClick={findLocation} className="flex item-center">
+    <div className="h-[50px] w-full px-[20px] py-[5px] hover:bg-gray-100 active:bg-gray-200 flex justify-between items:center ">
+      <button onClick={findLocation} className="flex-1 flex items-center">
         <p className="text-left text-[18px]">
           <span className="font-bold">From:</span>
-          <span className="mx-[5px] capitalize">{pickup}</span>
-          <span className="ml-[5px] font-bold">To:</span>
-          <span className="mx-[5px] capitalize">{dropoff}</span>
+          <span className="px-[7px] capitalize">{pickup}</span>
+          <span className="pl-[10px] font-bold">To:</span>
+          <span className="px-[7px] capitalize">{dropoff}</span>
         </p>
       </button>
       <button
-        className=""
+        className="w-fit"
         onClick={() => deleteLocationItem(id)}
         disabled={deletePlaceLoading[id]}
       >
