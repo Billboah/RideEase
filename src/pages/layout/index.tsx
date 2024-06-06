@@ -116,7 +116,7 @@ const ComponentLayout = ({
           <nav className="h-[70px] px-4 flex items-center justify-between bg-black text-white">
             <Link href="/" className="cursor-pointer" passHref>
               <Image
-                src="/images/uber-logo.png"
+                src="/images/rideease_logo.png"
                 alt="uber logo"
                 height={40}
                 width={70}
