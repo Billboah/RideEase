@@ -81,11 +81,11 @@ const CarType = ({
       >
         <div className="flex items-center justify-start">
           <img
-            className="h-16 w-auto mx-4"
+            className="h-[70px] w-auto mx-4"
             src={car.imgUrl}
             alt={`${car.service} image`}
           />
-          <div className="flex flex-1 flex-col items-start ml-1">
+          <div className="flex flex-1 flex-col items-start">
             <div className="font-medium">{car.service}</div>
             <div className="text-xs text-blue-500">5 min away</div>
           </div>
