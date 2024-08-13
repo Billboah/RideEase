@@ -7,6 +7,7 @@ import axios from "axios";
 import ComponentLayout from "./layout";
 import { DotsLoading, FadeLoading } from "../config/appLoading";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 interface Destination {
   _id: string;
@@ -25,8 +26,12 @@ const Search = () => {
   const [deletePlaceLoading, setDeletePlaceLoading] = useState<{
     [key: string]: boolean;
   }>({});
+  const { data: session, status } = useSession();
 
   const saveLocationItem = async () => {
+    if (!session) {
+      alert("Sign in first before you can save destinations");
+    }
     setSavePlaceLoading(true);
     const product = {
       pickup: pickup.trim(),
@@ -198,7 +203,7 @@ const Search = () => {
               <div className="sr-only ">Save destination</div>
             </button>
           </div>
-          <div className="flex-1 w-full flex flex-col  overflow-y-scroll bg-white py-[10px] ">
+          <div className="flex-1 w-full flex flex-col  overflow-y-auto bg-white py-[10px] ">
             <div className="my-1 flex items-center bg-white px-4 py-2">
               <Image
                 className="mr-2 rounded-full bg-gray-400 p-1"
@@ -211,7 +216,7 @@ const Search = () => {
               Saved Places
             </div>
 
-            <div className="  h-full w-full relative">
+            <div className="h-full w-full relative">
               <div className="h-full w-full">
                 {placeLoading && (
                   <div className="absolute left-[45px] top-[-15px]">

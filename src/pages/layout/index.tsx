@@ -34,22 +34,13 @@ const ComponentLayout = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let timeoutId: string | number | NodeJS.Timeout | undefined;
-
     if (session) {
       setUser({
         name: session.user.name,
         photoUrl: session.user.image,
         email: session.user.email,
       });
-    } /*else {
-      setUser(null);
-      if (router.pathname !== "/login") {
-        timeoutId = setTimeout(() => {
-          router.push("/login");
-        }, 30000);
-      
-    }*/
+    }
   }, [session, push]);
 
   const displayHistory = async () => {
@@ -114,7 +105,7 @@ const ComponentLayout = ({
       <div className="h-full w-full min-w-[250px] bg-white flex flex-col">
         {pageName !== "ConfirmPage" && (
           <nav className="h-[70px] px-4 flex items-center justify-between bg-black text-white">
-            <Link href="/" className="cursor-pointer" passHref>
+            <Link href="/" className="cursor-pointer" passHref title="Home">
               <Image
                 src="/images/rideease_logo.png"
                 alt="uber logo"

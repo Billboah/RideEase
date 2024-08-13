@@ -71,21 +71,21 @@ const CarType = ({
   }, [apiError]);
 
   return (
-    <div className="h-[100px] w-full m-0 p-0">
+    <div className="h-fit w-full m-0 p-0">
       <button
-        className={`w-full h-[100px] px-5 hover:bg-gray-100 active:bg-white ${
-          selectedCar === car.service ? "bg-gray-100" : "bg-white"
+        className={`w-full h-fit p-3 hover:bg-gray-100 active:bg-white ${
+          selectedCar === car.service ? "bg-gray-200" : "bg-white"
         } flex justify-between items-center`}
         disabled={loadingDuration}
         onClick={SelectACar}
       >
         <div className="flex items-center justify-start">
           <img
-            className="h-[70px] w-auto mr-4  "
+            className="h-16 w-auto mx-4"
             src={car.imgUrl}
             alt={`${car.service} image`}
           />
-          <div className="flex flex-1 flex-col items-start">
+          <div className="flex flex-1 flex-col items-start ml-1">
             <div className="font-medium">{car.service}</div>
             <div className="text-xs text-blue-500">5 min away</div>
           </div>

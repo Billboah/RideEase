@@ -15,6 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import ComponentLayout from "./layout";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const stripePromise = loadStripe(
   "pk_test_51MKjY5AN6Uo13VzBRQfQc1RBF5AmlKyVIQxhtTiVkni1DF272YaLqJzoMMYipVCO7ix2UnuRFVnDZbtVrX1t12qj00SOMGXJJd"
@@ -30,6 +31,7 @@ const Confirm = () => {
   const [dropoffCoordinates, setDropoffCoordinates] = useState([0, 0]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { data: session, status } = useSession();
 
   const getPickupCoordinates = (pickup: any) => {
     fetch(
@@ -71,6 +73,9 @@ const Confirm = () => {
   }, []);
 
   const createCheckoutSession = async () => {
+    if (!session) {
+      alert("Sign in first before you order a ride.");
+    }
     const stripe = await stripePromise;
     setLoading(true);
     try {
@@ -133,7 +138,7 @@ const Confirm = () => {
           />
         </div>
         <div className="h-1/2 flex flex-col">
-          <div className="flex-1 overflow-y-scroll">
+          <div className="flex-1 overflow-y-auto">
             {carList.map((car, index) => (
               <CarType
                 key={index}
