@@ -1,5 +1,5 @@
 import React from "react";
-import Map from "../Components/map";
+import Map from "../components/map";
 import Link from "next/link";
 import ComponentLayout from "./layout";
 import Image from "next/image";

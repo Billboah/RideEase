@@ -1,4 +1,4 @@
-import { carList } from "../../../Components/data/carList";
+import { carList } from "../../../components/data/carList";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import { NextApiRequest, NextApiResponse } from "next";

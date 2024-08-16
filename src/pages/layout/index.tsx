@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import { ClipLoading } from "@/config/appLoading";
-import Trip from "@/Components/Trip";
+import Trip from "@/components/Trip";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { FcAbout, FcBusinessman } from "react-icons/fc";
 
