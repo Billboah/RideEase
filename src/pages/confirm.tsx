@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Map from "../component_temp/data/map";
+import Map from "../components/map";
 import { useRouter } from "next/router";
-import { carList } from "../component_temp/data/carList";
-import CarType from "../component_temp/data/CarType";
+import { carList } from "../components/data/carList";
+import CarType from "../components/data/CarType";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -70,7 +70,7 @@ const Confirm = () => {
     getDropoffCoordinates(dropoff);
     ResetCarType();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pickup, dropoff]);
 
   const createCheckoutSession = async () => {
     if (!session) {

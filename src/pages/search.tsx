@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import SavePlaces from "../component_temp/data/SavePlaces";
-import Map from "../component_temp/data/map";
+import SavePlaces from "../components/SavePlaces";
+import Map from "../components/map";
 import axios from "axios";
 import ComponentLayout from "./layout";
 import { DotsLoading, FadeLoading } from "../config/appLoading";
