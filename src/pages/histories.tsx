@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ComponentLayout from "./layout";
 import axios from "axios";
-import Map from "../components/map";
+import Map from "../component_temp/data/map";
 import { ClipLoading } from "@/config/appLoading";
-import Trip from "@/components/Trip";
+import Trip from "@/component_temp/data/Trip";
 
 const Order = () => {
   const [loading, setLoading] = useState(false);

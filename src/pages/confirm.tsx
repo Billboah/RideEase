@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Map from "../components/map";
+import Map from "../component_temp/data/map";
 import { useRouter } from "next/router";
-import { carList } from "../components/data/carList";
-import CarType from "../components/CarType";
+import { carList } from "../component_temp/data/carList";
+import CarType from "../component_temp/data/CarType";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import {

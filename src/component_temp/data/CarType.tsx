@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { useEffect, useState } from "react";
-import { setCarType, setCarDuration } from "../state/features/locationSlice";
+import { setCarType, setCarDuration } from "../../state/features/locationSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { selectCarType } from "../state/features/locationSlice";
+import { selectCarType } from "../../state/features/locationSlice";
 import { FadeLoading } from "@/config/appLoading";
-import { Car } from "../../types";
+import { Car } from "../../../types";
 
 const CarType = ({
   car,
